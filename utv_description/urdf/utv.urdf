@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<robot name="UTV">
+  <link name="base_link">
+    <visual>
+      <geometry>
+        <mesh filename="package://utv_description/meshes/UTV_frame.stl"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="flw">
+    <visual>
+      <geometry>
+        <mesh filename="package://utv_description/meshes/UTV_FLW.stl"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="base_to_flw" type="fixed">
+    <parent link="base_link"/>
+    <child link="flw"/>
+  </joint>
+
+  <link name="frw">
+    <visual>
+      <geometry>
+        <mesh filename="package://utv_description/meshes/UTV_FRW.stl"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="base_to_frw" type="fixed">
+    <parent link="base_link"/>
+    <child link="frw"/>
+  </joint>
+
+    <link name="blw">
+    <visual>
+      <geometry>
+        <mesh filename="package://utv_description/meshes/UTV_BLW.stl"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="base_to_blw" type="fixed">
+    <parent link="base_link"/>
+    <child link="blw"/>
+  </joint>
+
+    <link name="brw">
+    <visual>
+      <geometry>
+        <mesh filename="package://utv_description/meshes/UTV_BRW.stl"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <joint name="base_to_brw" type="fixed">
+    <parent link="base_link"/>
+    <child link="brw"/>
+  </joint>
+
+</robot>
