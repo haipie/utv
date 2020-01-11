@@ -65,7 +65,7 @@
   <joint name="base_to_brw" type="fixed">
     <parent link="base_link"/>
     <child link="brw"/>
-    <origin xyz="1.45 .6 0" rpy="0 0 0"/>
+    <origin xyz="1.46 .6 0" rpy="0 0 0"/>
   </joint>
 
 </robot>
