@@ -1,10 +1,20 @@
 <?xml version="1.0"?>
 <robot name="UTV">
+
+  <material name="orange">
+    <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
+  </material>
+
+  <material name="black">
+    <color rgba="${0/255} ${0/255} ${0/255} 1.0"/>
+  </material>
+
   <link name="base_link">
     <visual>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_frame.stl"/>
       </geometry>
+      <material name="orange"/>
     </visual>
   </link>
 
@@ -14,6 +24,7 @@
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FLW.stl"/>
       </geometry>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -29,6 +40,7 @@
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FRW.stl"/>
       </geometry>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -38,12 +50,13 @@
     <origin xyz="-.6 .6 0" rpy="0 0 0"/>
   </joint>
 
-    <link name="blw">
+  <link name="blw">
     <visual>
       <origin xyz="-1.45 .6 0" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_BLW.stl"/>
       </geometry>
+      <material name="black"/>
     </visual>
   </link>
 
@@ -53,12 +66,13 @@
     <origin xyz="1.45 -.6 0" rpy="0 0 0"/>
   </joint>
 
-    <link name="brw">
+  <link name="brw">
     <visual>
       <origin xyz="-1.45 -.6 0" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_BRW.stl"/>
       </geometry>
+      <material name="black"/>
     </visual>
   </link>
 
