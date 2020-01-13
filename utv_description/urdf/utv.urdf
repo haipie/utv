@@ -11,6 +11,7 @@
 
   <link name="base_link">
     <visual>
+      <origin xyz= "0 0 .3522" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_frame.stl"/>
       </geometry>
@@ -20,7 +21,7 @@
 
   <link name="flw">
     <visual>
-      <origin xyz=".6 .6 0" rpy="0 0 0"/>
+      <origin xyz=".6078 .6237 0.0601" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FLW.stl"/>
       </geometry>
@@ -31,12 +32,12 @@
   <joint name="base_to_flw" type="fixed">
     <parent link="base_link"/>
     <child link="flw"/>
-    <origin xyz="-.6 -.6 0" rpy="0 0 0"/>
+    <origin xyz="-.6078 -.6237 .2919" rpy="0 0 0"/>
   </joint>
 
   <link name="frw">
     <visual>
-      <origin xyz=".6 -.6 0" rpy="0 0 0"/>
+      <origin xyz=".6078 -.6237 .0601" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FRW.stl"/>
       </geometry>
@@ -47,12 +48,12 @@
   <joint name="base_to_frw" type="fixed">
     <parent link="base_link"/>
     <child link="frw"/>
-    <origin xyz="-.6 .6 0" rpy="0 0 0"/>
+    <origin xyz="-.6078 .6237 .2919" rpy="0 0 0"/>
   </joint>
 
   <link name="blw">
     <visual>
-      <origin xyz="-1.45 .6 0" rpy="0 0 0"/>
+      <origin xyz="-1.39 .615 .0601" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_BLW.stl"/>
       </geometry>
@@ -63,12 +64,12 @@
   <joint name="base_to_blw" type="fixed">
     <parent link="base_link"/>
     <child link="blw"/>
-    <origin xyz="1.45 -.6 0" rpy="0 0 0"/>
+    <origin xyz="1.39 -.615 .2919" rpy="0 0 0"/>
   </joint>
 
   <link name="brw">
     <visual>
-      <origin xyz="-1.45 -.6 0" rpy="0 0 0"/>
+      <origin xyz="-1.39 -.615 .0601" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_BRW.stl"/>
       </geometry>
@@ -79,7 +80,7 @@
   <joint name="base_to_brw" type="fixed">
     <parent link="base_link"/>
     <child link="brw"/>
-    <origin xyz="1.46 .6 0" rpy="0 0 0"/>
+    <origin xyz="1.39 .615 .2919" rpy="0 0 0"/>
   </joint>
 
 </robot>
