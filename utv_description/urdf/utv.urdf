@@ -17,6 +17,12 @@
       </geometry>
       <material name="orange"/>
     </visual>
+    <collision>
+      <origin xyz= ".5 0 .3522" rpy="0 0 0"/>
+      <geometry>
+        <box size="2.5 1.4 1"/>
+      </geometry>
+    </collision>
   </link>
 
   <link name="flw">
@@ -29,7 +35,8 @@
     </visual>
   </link>
 
-  <joint name="base_to_flw" type="fixed">
+  <joint name="base_to_flw" type="continuous">
+    <axis xyz="0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="flw"/>
     <origin xyz="-.6078 -.6237 .2919" rpy="0 0 0"/>
@@ -45,7 +52,8 @@
     </visual>
   </link>
 
-  <joint name="base_to_frw" type="fixed">
+  <joint name="base_to_frw" type="continuous">
+    <axis xyz= "0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="frw"/>
     <origin xyz="-.6078 .6237 .2919" rpy="0 0 0"/>
@@ -61,7 +69,8 @@
     </visual>
   </link>
 
-  <joint name="base_to_blw" type="fixed">
+  <joint name="base_to_blw" type="continuous">
+    <axis xyz="0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="blw"/>
     <origin xyz="1.39 -.615 .2919" rpy="0 0 0"/>
@@ -77,7 +86,8 @@
     </visual>
   </link>
 
-  <joint name="base_to_brw" type="fixed">
+  <joint name="base_to_brw" type="continuous">
+    <axis xyz="0 1 0"  rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="brw"/>
     <origin xyz="1.39 .615 .2919" rpy="0 0 0"/>
