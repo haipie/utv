@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<robot name="UTV">
+<robot name="UTV" xmlns:xacro="http://ros.org/wiki.xacro">
 
   <material name="orange">
     <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
@@ -18,11 +18,15 @@
       <material name="orange"/>
     </visual>
     <collision>
-      <origin xyz= ".5 0 .3522" rpy="0 0 0"/>
+      <origin xyz= ".475 0 .893" rpy="0 0 0"/>
       <geometry>
-        <box size="2.5 1.4 1"/>
+        <box size="2.87 1.4 1.786"/>
       </geometry>
     </collision>
+    <inertial>
+      <mass value="1075"/>
+      <inertia ixx="1023.64" ixy="0.0" ixz="0.0" iyy="913.47" iyz="0.0" izz="461.33"/>
+    </inertial>
   </link>
 
   <link name="flw">
@@ -33,6 +37,10 @@
       </geometry>
       <material name="black"/>
     </visual>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx=".255" ixy="0.0" ixz="0.0" iyy=".255" iyz="0.0" izz=".42632"/>
+    </inertial>
   </link>
 
   <joint name="base_to_flw" type="continuous">
@@ -50,6 +58,10 @@
       </geometry>
       <material name="black"/>
     </visual>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx=".255" ixy="0.0" ixz="0.0" iyy=".255" iyz="0.0" izz=".42632"/>
+    </inertial>
   </link>
 
   <joint name="base_to_frw" type="continuous">
@@ -67,6 +79,10 @@
       </geometry>
       <material name="black"/>
     </visual>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx=".255" ixy="0.0" ixz="0.0" iyy=".255" iyz="0.0" izz=".42632"/>
+    </inertial>
   </link>
 
   <joint name="base_to_blw" type="continuous">
@@ -84,6 +100,10 @@
       </geometry>
       <material name="black"/>
     </visual>
+    <inertial>
+      <mass value="10"/>
+      <inertia ixx=".255" ixy="0.0" ixz="0.0" iyy=".255" iyz="0.0" izz=".42632"/>
+    </inertial>
   </link>
 
   <joint name="base_to_brw" type="continuous">
