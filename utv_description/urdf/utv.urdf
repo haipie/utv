@@ -1,6 +1,15 @@
 <?xml version="1.0"?>
 <robot name="UTV" xmlns:xacro="http://ros.org/wiki.xacro">
 
+<xacro:property name="mass" value="1000" />
+<!--<xacro:property name="wmass" value="20" />-->
+<xacro:property name="wheeldiam" value=".584" />
+<xacro:property name="bodylen" value="2.87" />
+<xacro:property name="bodywidth" value="1.4" />
+<xacro:property name="bodyheight" value="1.79" />
+<xacro:property name="wheelthick" value=".225" />
+
+
   <material name="orange">
     <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
   </material>
@@ -18,14 +27,14 @@
       <material name="orange"/>
     </visual>
     <collision>
-      <origin xyz= ".475 0 .893" rpy="0 0 0"/>
+      <origin xyz= ".475 0 ${bodyheight/4}" rpy="0 0 0"/>
       <geometry>
-        <box size="2.87 1.4 1.786"/>
+        <box size="${bodylen} ${bodywidth} ${bodyheight/2}"/>
       </geometry>
     </collision>
     <inertial>
-      <mass value="1075"/>
-      <inertia ixx="1023.64" ixy="0.0" ixz="0.0" iyy="913.47" iyz="0.0" izz="461.33"/>
+      <mass value="${mass}"/>
+      <inertia ixx="${mass/12*(bodyheight**2+bodylen**2)}" ixy="0.0" ixz="0.0" iyy="${mass/12*(bodywidth**2+bodylen**2)}" iyz="0.0" izz="${mass/12*(bodywidth**2+bodyheight**2)}"/>
     </inertial>
   </link>
 
@@ -39,7 +48,7 @@
     </visual>
     <inertial>
       <mass value="10"/>
-      <inertia ixx=".255" ixy="0.0" ixz="0.0" iyy=".255" iyz="0.0" izz=".42632"/>
+      <inertia ixx="${mass/12*(3*(wheeldiam/2)**2+wheelthick**2)}" ixy="0.0" ixz="0.0" iyy="${mass/12*(3*(wheeldiam/2)**2+wheelthick**2)}" iyz="0.0" izz="${mass/2*wheeldiam/2}"/>
     </inertial>
   </link>
 
