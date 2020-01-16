@@ -121,5 +121,9 @@
     <child link="brw"/>
     <origin xyz="1.39 .615 .2919" rpy="0 0 0"/>
   </joint>
-
+  <!--<gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/</robotNamespace>
+    </plugin>
+  </gazebo>-->
 </robot>
