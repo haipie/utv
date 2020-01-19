@@ -9,6 +9,13 @@
 <xacro:property name="bodyheight" value="1.79" />
 <xacro:property name="wheelthick" value=".225" />
 
+<!--xacro:macro name="wheel" params="prefix sufix reflect">
+
+  <link name="${prefix}_${suffix}_wheel">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"
+      geometry
+-->
 
   <material name="orange">
     <color rgba="${255/255} ${108/255} ${10/255} 1.0"/>
