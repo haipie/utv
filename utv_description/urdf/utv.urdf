@@ -1,20 +1,35 @@
 <?xml version="1.0"?>
 <robot name="UTV" xmlns:xacro="http://ros.org/wiki.xacro">
 
-<xacro:property name="mass" value="1000" />
-<!--<xacro:property name="wmass" value="20" />-->
+<!--<xacro:property name="mass" value="1000" />
+<xacro:property name="wmass" value="20" />-->
 <xacro:property name="wheeldiam" value=".584" />
 <xacro:property name="bodylen" value="2.87" />
 <xacro:property name="bodywidth" value="1.4" />
 <xacro:property name="bodyheight" value="1.79" />
 <xacro:property name="wheelthick" value=".225" />
 
-<!--xacro:macro name="wheel" params="prefix sufix reflect">
+<xacro:macro name="body_inertial" params="mass">
+  <inertial>
+    <mass value="${mass}" />
+    <inertia ixx="${mass/12*(bodyheight**2+bodylen**2)}" ixy="0.0" ixz="0.0" iyy="${mass/12*(bodywidth**2+bodylen**2)}" iyz="0.0" izz="${mass/12*(bodywidth**2+bodyheight**2)}"/>
+  </inertial>
+</xacro:macro>
 
-  <link name="${prefix}_${suffix}_wheel">
+<xacro:macro name="wheel_inertial" params="mass">
+  <inertial>
+    <mass value="${mass}" />
+    <inertia ixx="${mass/12*(3*(wheeldiam/2)**2+wheelthick**2)}" ixy="0.0" ixz="0.0" iyy="${mass/12*(3*(wheeldiam/2)**2+wheelthick**2)}" iyz="0.0" izz="${mass/2*wheeldiam/2}"/>
+  </inertial>
+</xacro:macro>
+<!--xacro:macro name="frontwheel" params="prefix reflect">
+
+  <link name="${prefix}_wheel">
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"
-      geometry
+      <origin xyz=".608 .624 .06" rpy="0 0 0"
+      <geometry>
+        <mesh scale ="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FLW.stl"/>
+      </geometry>
 -->
 
   <material name="orange">
@@ -39,24 +54,18 @@
         <box size="${bodylen} ${bodywidth} ${bodyheight/2}"/>
       </geometry>
     </collision>
-    <inertial>
-      <mass value="${mass}"/>
-      <inertia ixx="${mass/12*(bodyheight**2+bodylen**2)}" ixy="0.0" ixz="0.0" iyy="${mass/12*(bodywidth**2+bodylen**2)}" iyz="0.0" izz="${mass/12*(bodywidth**2+bodyheight**2)}"/>
-    </inertial>
+    <xacro:body_inertial mass="1000"/>
   </link>
 
   <link name="flw">
     <visual>
-      <origin xyz=".6078 .6237 0.0601" rpy="0 0 0"/>
+      <origin xyz=".608 .624 0.06" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FLW.stl"/>
       </geometry>
       <material name="black"/>
     </visual>
-    <inertial>
-      <mass value="10"/>
-      <inertia ixx="${mass/12*(3*(wheeldiam/2)**2+wheelthick**2)}" ixy="0.0" ixz="0.0" iyy="${mass/12*(3*(wheeldiam/2)**2+wheelthick**2)}" iyz="0.0" izz="${mass/2*wheeldiam/2}"/>
-    </inertial>
+    <xacro:wheel_inertial mass="10"/>
   </link>
 
   <joint name="base_to_flw" type="continuous">
@@ -66,26 +75,60 @@
     <origin xyz="-.6078 -.6237 .2919" rpy="0 0 0"/>
   </joint>
 
+  <gazebo reference="flw">
+    <mu1 value="200.0"/>
+    <mu2 value="100.0"/>
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+ <transmission name="$flw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$flw_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="base_to_flw">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+
+
   <link name="frw">
     <visual>
-      <origin xyz=".6078 -.6237 .0601" rpy="0 0 0"/>
+      <origin xyz=".608 -.624 .06" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FRW.stl"/>
       </geometry>
       <material name="black"/>
     </visual>
-    <inertial>
-      <mass value="10"/>
-      <inertia ixx=".255" ixy="0.0" ixz="0.0" iyy=".255" iyz="0.0" izz=".42632"/>
-    </inertial>
+    <xacro:wheel_inertial mass="10"/>
   </link>
 
   <joint name="base_to_frw" type="continuous">
     <axis xyz= "0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="frw"/>
-    <origin xyz="-.6078 .6237 .2919" rpy="0 0 0"/>
+    <origin xyz="-.608 .624 .292" rpy="0 0 0"/>
   </joint>
+
+    <gazebo reference="frw">
+    <mu1 value="200.0"/>
+    <mu2 value="100.0"/>
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+ <transmission name="$frw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$frw_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="base_to_frw">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
 
   <link name="blw">
     <visual>
@@ -95,42 +138,73 @@
       </geometry>
       <material name="black"/>
     </visual>
-    <inertial>
-      <mass value="10"/>
-      <inertia ixx=".255" ixy="0.0" ixz="0.0" iyy=".255" iyz="0.0" izz=".42632"/>
-    </inertial>
+    <xacro:wheel_inertial mass="10"/>
   </link>
 
   <joint name="base_to_blw" type="continuous">
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="blw"/>
-    <origin xyz="1.39 -.615 .2919" rpy="0 0 0"/>
+    <origin xyz="1.39 -.615 .292" rpy="0 0 0"/>
   </joint>
+
+  <gazebo reference="blw">
+    <mu1 value="200.0"/>
+    <mu2 value="100.0"/>
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+ <transmission name="$blw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$blw_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="base_to_blw">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>  
 
   <link name="brw">
     <visual>
-      <origin xyz="-1.39 -.615 .0601" rpy="0 0 0"/>
+      <origin xyz="-1.39 -.615 .060" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_BRW.stl"/>
       </geometry>
       <material name="black"/>
     </visual>
-    <inertial>
-      <mass value="10"/>
-      <inertia ixx=".255" ixy="0.0" ixz="0.0" iyy=".255" iyz="0.0" izz=".42632"/>
-    </inertial>
+    <xacro:wheel_inertial mass="10"/>
   </link>
 
   <joint name="base_to_brw" type="continuous">
     <axis xyz="0 1 0"  rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="brw"/>
-    <origin xyz="1.39 .615 .2919" rpy="0 0 0"/>
+    <origin xyz="1.39 .615 .292" rpy="0 0 0"/>
   </joint>
-  <!--<gazebo>
+
+  <gazebo reference="brw">
+    <mu1 value="200.0"/>
+    <mu2 value="100.0"/>
+    <kp value="10000000.0" />
+    <kd value="1.0" />
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+ <transmission name="$brw_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <actuator name="$brw_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+    <joint name="base_to_brw">
+      <hardwareInterface>VelocityJointInterface</hardwareInterface>
+    </joint>
+  </transmission>
+  
+  <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/</robotNamespace>
     </plugin>
-  </gazebo>-->
+  </gazebo>
 </robot>
