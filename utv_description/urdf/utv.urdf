@@ -48,12 +48,12 @@
       </geometry>
       <material name="orange"/>
     </visual>
-    <!--<collision>
-      <origin xyz= ".475 0 ${bodyheight/4}" rpy="0 0 0"/>
+    <collision>
+      <origin xyz= ".475 0 ${bodyheight/2}" rpy="0 0 0"/>
       <geometry>
-        <box size="${bodylen} ${bodywidth} ${bodyheight/2}"/>
+        <box size="${bodylen} ${bodywidth} ${bodyheight/4}"/>
       </geometry>
-    </collision>-->
+    </collision>
     <xacro:body_inertial mass="10"/>
   </link>
 
@@ -67,9 +67,9 @@
     </visual>
     <xacro:wheel_inertial mass="10"/>
     <collision>
-      <origin xyz=".608 .624 0.06" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
       <geometry>
-        <cylinder length="${wheelthick}" radius="${wheeldiam}"/>
+        <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
       </geometry>
     </collision>
   </link>
@@ -86,7 +86,7 @@
     <mu2 value="100.0"/>
     <kp value="10000000.0" />
     <kd value="1.0" />
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Black</material>
   </gazebo>
 
  <transmission name="$flw_trans">
@@ -109,9 +109,9 @@
       <material name="black"/>
     </visual>
     <collision>
-      <origin xyz=".608 -.624 .06" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
       <geometry>
-        <cylinder length="${wheelthick}" radius="${wheeldiam}"/>
+        <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
       </geometry>
     </collision>
     <xacro:wheel_inertial mass="10"/>
@@ -129,7 +129,7 @@
     <mu2 value="100.0"/>
     <kp value="10000000.0" />
     <kd value="1.0" />
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Black</material>
   </gazebo>
 
  <transmission name="$frw_trans">
@@ -151,9 +151,9 @@
       <material name="black"/>
     </visual>
     <collision>
-      <origin xyz="-1.39 .615 .060" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
       <geometry>
-        <cylinder length="${wheelthick}" radius="${wheeldiam}"/>
+        <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
       </geometry>
     </collision>
     <xacro:wheel_inertial mass="10"/>
@@ -171,7 +171,7 @@
     <mu2 value="100.0"/>
     <kp value="10000000.0" />
     <kd value="1.0" />
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Black</material>
   </gazebo>
 
  <transmission name="$blw_trans">
@@ -193,9 +193,9 @@
       <material name="black"/>
     </visual>
     <collision>
-      <origin xyz="1.39 -.615 .060" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="1.57 0 0"/>
       <geometry>
-        <cylinder length="${wheelthick}" radius="${wheeldiam}"/>
+        <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
       </geometry>
     </collision>
     <xacro:wheel_inertial mass="10"/>
@@ -213,7 +213,7 @@
     <mu2 value="100.0"/>
     <kp value="10000000.0" />
     <kd value="1.0" />
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Black</material>
   </gazebo>
 
  <transmission name="$brw_trans">
