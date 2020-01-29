@@ -42,14 +42,14 @@
 
   <link name="base_link">
     <visual>
-      <origin xyz= "0 0 .3522" rpy="0 0 0"/>
+      <origin xyz= ".39 0 .35" rpy="0 0 3.14"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_frame.stl"/>
       </geometry>
       <material name="orange"/>
     </visual>
     <collision>
-      <origin xyz= ".475 0 ${bodyheight/2}" rpy="0 0 0"/>
+      <origin xyz= ".48 0 ${bodyheight/2}" rpy="0 0 0"/>
       <geometry>
         <box size="${bodylen} ${bodywidth} ${bodyheight/4}"/>
       </geometry>
@@ -59,7 +59,7 @@
 
   <link name="flw">
     <visual>
-      <origin xyz=".608 .624 0.06" rpy="0 0 0"/>
+      <origin xyz=".61 .62 0.06" rpy="0 0 0"/>
       <geometry>
         <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FLW.stl"/>
       </geometry>
@@ -78,7 +78,7 @@
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="flw"/>
-    <origin xyz="-.6078 -.6237 .2919" rpy="0 0 0"/>
+    <origin xyz="-1 -.6237 .2919" rpy="0 0 0"/>
   </joint>
 
   <gazebo reference="flw">
@@ -121,7 +121,7 @@
     <axis xyz= "0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="frw"/>
-    <origin xyz="-.608 .624 .292" rpy="0 0 0"/>
+    <origin xyz="-1 .624 .292" rpy="0 0 0"/>
   </joint>
 
     <gazebo reference="frw">
@@ -163,7 +163,7 @@
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="blw"/>
-    <origin xyz="1.39 -.615 .292" rpy="0 0 0"/>
+    <origin xyz="1 -.615 .292" rpy="0 0 0"/>
   </joint>
 
   <gazebo reference="blw">
@@ -205,7 +205,7 @@
     <axis xyz="0 1 0"  rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="brw"/>
-    <origin xyz="1.39 .615 .292" rpy="0 0 0"/>
+    <origin xyz="1 .615 .292" rpy="0 0 0"/>
   </joint>
 
   <gazebo reference="brw">
