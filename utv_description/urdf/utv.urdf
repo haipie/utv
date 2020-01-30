@@ -4,15 +4,16 @@
 <!--<xacro:property name="mass" value="1000" />
 <xacro:property name="wmass" value="20" />-->
 <xacro:property name="wheeldiam" value=".584" />
-<xacro:property name="bodylen" value="2.87" />
-<xacro:property name="bodywidth" value="1.4" />
-<xacro:property name="bodyheight" value="1.79" />
+<xacro:property name="utvlen" value="2.87" />
+<xacro:property name="utvwidth" value="1.4" />
+<xacro:property name="utvheight" value="1.79" />
 <xacro:property name="wheelthick" value=".225" />
+<xacro:property name="pi" value="3.14" />
 
 <xacro:macro name="body_inertial" params="mass">
   <inertial>
     <mass value="${mass}" />
-    <inertia ixx="${mass/12*(bodyheight**2+bodylen**2)}" ixy="0.0" ixz="0.0" iyy="${mass/12*(bodywidth**2+bodylen**2)}" iyz="0.0" izz="${mass/12*(bodywidth**2+bodyheight**2)}"/>
+    <inertia ixx="${mass/12*(utvheight**2+utvlen**2)}" ixy="0.0" ixz="0.0" iyy="${mass/12*(utvwidth**2+utvlen**2)}" iyz="0.0" izz="${mass/12*(utvwidth**2+utvheight**2)}"/>
   </inertial>
 </xacro:macro>
 
@@ -26,9 +27,9 @@
 
   <link name="${prefix}_wheel">
     <visual>
-      <origin xyz=".608 .624 .06" rpy="0 0 0"
+      <origin xyz="-1 .62 -.29" rpy="0 0 0"
       <geometry>
-        <mesh scale ="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FLW.stl"/>
+        <mesh filename="package://utv_description/meshes/UTV_FLW.stl"/>
       </geometry>
 -->
 
@@ -42,16 +43,16 @@
 
   <link name="base_link">
     <visual>
-      <origin xyz= ".39 0 .35" rpy="0 0 3.14"/>
+      <origin xyz= "0 0 0" rpy="0 0 0"/>
       <geometry>
-        <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_frame.stl"/>
+        <mesh filename="package://utv_description/meshes/UTV_frame.stl"/>
       </geometry>
       <material name="orange"/>
     </visual>
     <collision>
-      <origin xyz= ".48 0 ${bodyheight/2}" rpy="0 0 0"/>
+      <origin xyz= ".48 0 ${utvheight/2}" rpy="0 0 0"/>
       <geometry>
-        <box size="${bodylen} ${bodywidth} ${bodyheight/4}"/>
+        <box size="${utvlen} ${utvwidth} ${utvheight/4}"/>
       </geometry>
     </collision>
     <xacro:body_inertial mass="10"/>
@@ -59,15 +60,15 @@
 
   <link name="flw">
     <visual>
-      <origin xyz=".61 .62 0.06" rpy="0 0 0"/>
+      <origin xyz="-1 .62 -.29" rpy="0 0 0"/>
       <geometry>
-        <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FLW.stl"/>
+        <mesh filename="package://utv_description/meshes/UTV_FLW.stl"/>
       </geometry>
       <material name="black"/>
     </visual>
     <xacro:wheel_inertial mass="10"/>
     <collision>
-      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
       <geometry>
         <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
       </geometry>
@@ -78,7 +79,7 @@
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="flw"/>
-    <origin xyz="-1 -.6237 .2919" rpy="0 0 0"/>
+    <origin xyz="1 -.62 .29" rpy="0 0 0"/>
   </joint>
 
   <gazebo reference="flw">
@@ -102,14 +103,14 @@
 
   <link name="frw">
     <visual>
-      <origin xyz=".608 -.624 .06" rpy="0 0 0"/>
+      <origin xyz="-1 -.62 -.29" rpy="0 0 0"/>
       <geometry>
-        <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_FRW.stl"/>
+        <mesh filename="package://utv_description/meshes/UTV_FRW.stl"/>
       </geometry>
       <material name="black"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
       <geometry>
         <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
       </geometry>
@@ -121,7 +122,7 @@
     <axis xyz= "0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="frw"/>
-    <origin xyz="-1 .624 .292" rpy="0 0 0"/>
+    <origin xyz="1 .62 .29" rpy="0 0 0"/>
   </joint>
 
     <gazebo reference="frw">
@@ -144,14 +145,14 @@
 
   <link name="blw">
     <visual>
-      <origin xyz="-1.39 .615 .060" rpy="0 0 0"/>
+      <origin xyz="1 .62 -.29" rpy="0 0 0"/>
       <geometry>
-        <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_BLW.stl"/>
+        <mesh filename="package://utv_description/meshes/UTV_BLW.stl"/>
       </geometry>
       <material name="black"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
       <geometry>
         <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
       </geometry>
@@ -163,7 +164,7 @@
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="blw"/>
-    <origin xyz="1 -.615 .292" rpy="0 0 0"/>
+    <origin xyz="-1 -.62 .29" rpy="0 0 0"/>
   </joint>
 
   <gazebo reference="blw">
@@ -186,14 +187,14 @@
 
   <link name="brw">
     <visual>
-      <origin xyz="-1.39 -.615 .060" rpy="0 0 0"/>
+      <origin xyz="1 -.62 -.29" rpy="0 0 0"/>
       <geometry>
-        <mesh scale="0.001 0.001 0.001" filename="package://utv_description/meshes/UTV_BRW.stl"/>
+        <mesh filename="package://utv_description/meshes/UTV_BRW.stl"/>
       </geometry>
       <material name="black"/>
     </visual>
     <collision>
-      <origin xyz="0 0 0" rpy="1.57 0 0"/>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
       <geometry>
         <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
       </geometry>
@@ -205,7 +206,7 @@
     <axis xyz="0 1 0"  rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="brw"/>
-    <origin xyz="1 .615 .292" rpy="0 0 0"/>
+    <origin xyz="-1 .62 .29" rpy="0 0 0"/>
   </joint>
 
   <gazebo reference="brw">
