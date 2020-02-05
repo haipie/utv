@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <robot name="UTV" xmlns:xacro="http://ros.org/wiki.xacro">
 
-<!--<xacro:property name="mass" value="1000" />
+<!--
+<xacro:property name="mass" value="1000" />
 <xacro:property name="wmass" value="20" />-->
 <xacro:property name="wheeldiam" value=".584" />
 <xacro:property name="utvlen" value="2.87" />
@@ -23,14 +24,42 @@
     <inertia ixx="${mass/12*(3*(wheeldiam/2)**2+wheelthick**2)}" ixy="0.0" ixz="0.0" iyy="${mass/12*(3*(wheeldiam/2)**2+wheelthick**2)}" iyz="0.0" izz="${mass/2*wheeldiam/2}"/>
   </inertial>
 </xacro:macro>
-<!--xacro:macro name="frontwheel" params="prefix reflect">
 
-  <link name="${prefix}_wheel">
+<xacro:macro name="frontwheel" params="prefix reflect">
+  <link name="${prefix}w">
     <visual>
-      <origin xyz="-1 .62 -.29" rpy="0 0 0"
+      <origin xyz="-1 ${reflect*-.62} -.29" rpy="0 0 0"/>
       <geometry>
         <mesh filename="package://utv_description/meshes/UTV_FLW.stl"/>
       </geometry>
+    </visual>
+    <xacro:wheel_inertial mass="10"/>
+    <collision>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+      <geometry>
+        <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
+      </geometry>
+    </collision>
+  </link>
+</xacro:macro>
+
+<!--
+<xacro:macro name="backwheel" params="prefix reflect">
+  <link name="${prefix}w">
+    <visual>
+      <origin xyz="-1 .62 -.29" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://utv_description/meshes/UTV_BLW.stl"/>
+      </geometry>
+      <xacro:wheel_inertial mass="10"/>
+    <collision>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+      <geometry>
+        <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
+      </geometry>
+    </collision>
+  </link>
+</xacro:macro>
 -->
 
   <material name="orange">
@@ -58,7 +87,7 @@
     <xacro:body_inertial mass="10"/>
   </link>
 
-  <link name="flw">
+  <!--<link name="flw">
     <visual>
       <origin xyz="-1 .62 -.29" rpy="0 0 0"/>
       <geometry>
@@ -73,13 +102,15 @@
         <cylinder length="${wheelthick}" radius="${wheeldiam/2}"/>
       </geometry>
     </collision>
-  </link>
+  </link> -->
+
+  <xacro:frontwheel prefix="fl" reflect="1"/>
 
   <joint name="base_to_flw" type="continuous">
     <axis xyz="0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="flw"/>
-    <origin xyz="1 -.62 .29" rpy="0 0 0"/>
+    <origin xyz="1 .62 .29" rpy="0 0 0"/>
   </joint>
 
   <gazebo reference="flw">
@@ -101,7 +132,7 @@
   </transmission>
 
 
-  <link name="frw">
+  <!--<link name="frw">
     <visual>
       <origin xyz="-1 -.62 -.29" rpy="0 0 0"/>
       <geometry>
@@ -116,13 +147,16 @@
       </geometry>
     </collision>
     <xacro:wheel_inertial mass="10"/>
-  </link>
+  </link>-->
+  
+  
+  <xacro:frontwheel prefix="fr" reflect="-1"/>
 
   <joint name="base_to_frw" type="continuous">
     <axis xyz= "0 1 0" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="frw"/>
-    <origin xyz="1 .62 .29" rpy="0 0 0"/>
+    <origin xyz="1 -.62 .29" rpy="0 0 0"/>
   </joint>
 
     <gazebo reference="frw">
