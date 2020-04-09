@@ -49,6 +49,50 @@
     <xacro:body_inertial mass="10"/>
   </link>
 
+<!--Front Steer Description-->
+  <link name="front_steer"/>
+ <joint name="front_steer_joint" type="fixed">
+    <axis xyz="0 0 1" rpy="0 0 0"/>
+    <!--<limit effort="10" velocity="1" lower="-${pi/2}" upper="${pi/2}"/>-->
+    <parent link="base_link"/>
+    <child link="front_steer"/>
+    <origin xyz="1 0 .29 " rpy="0 0 0"/>
+  </joint>
+
+<!--Steer Left-->
+  <link name="steer_left"/>
+
+  <joint name="steer_left_joint" type="revolute">
+    <axis xyz="0 0 1" rpy="0 0 0"/>
+    <limit effort="10" velocity="1" lower="-${pi/2}" upper="${pi/2}"/>
+    <parent link="base_link"/>
+    <child link="steer_left"/>
+    <origin xyz="1 .62 .5 " rpy="0 0 0"/>
+  </joint>
+
+
+<!--Steer Right-->
+  <link name="steer_right"/>
+
+  <joint name="steer_right_joint" type="revolute">
+    <axis xyz="0 0 1" rpy="0 0 0"/>
+    <limit effort="10" velocity="1" lower="-${pi/2}" upper="${pi/2}"/>
+    <parent link="base_link"/>
+    <child link="steer_right"/>
+    <origin xyz="1 -.62 .5 " rpy="0 0 0"/>
+  </joint>
+
+<!--Rear Steer Descirption-->
+  <link name="rear_steer"/>
+
+ <joint name="rear_steer_joint" type="continuous">
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="rear_steer"/>
+    <origin xyz="-1 0 .29 " rpy="0 0 0"/>
+  </joint>
+
+
 <!--Front Left Wheel Description-->
   <link name="flw">
     <visual>
@@ -178,7 +222,7 @@
     </joint>
   </transmission>  
 
-<!--Back Right Wheel Desciprtion-->
+<!--Back Right Wheel Description-->
   <link name="brw">
     <visual>
       <origin xyz="1 .62 -.29" rpy="0 0 0"/>
@@ -224,6 +268,7 @@
   <gazebo>
     <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
       <robotNamespace>/</robotNamespace>
+      <robotSimType>steer_bot_hardware_gazebo/SteerBotHardwareGazebo</robotSimType>
     </plugin>
   </gazebo>
 </robot>

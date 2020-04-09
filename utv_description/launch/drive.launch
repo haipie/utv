@@ -1,5 +1,5 @@
 <launch>
-  <arg name="model" default="$(find utv_description)/urdf/utv.urdf"/>
+  <arg name="model" default="$(find utv_description)/urdf/utv_steer.urdf"/>
   <arg name="rvizconfig" default="$(find utv_description)/rviz/urdf.rviz" />
 
   <include file="$(find utv_description)/launch/gazebo.launch">
@@ -12,15 +12,15 @@
             file="$(find utv_description)/config/joints.yaml"
             ns="utv_joint_state_controller" />
   <rosparam command="load"
-            file="$(find utv_description)/config/diffdrive.yaml"
-            ns="utv_diff_drive_controller" />
+            file="$(find utv_description)/config/ackerdrive.yaml"
+            ns="utv_steer_drive_controller" />
 
   <node name="utv_controller_spawner" pkg="controller_manager" type="spawner"
     args="utv_joint_state_controller
-          utv_diff_drive_controller
+          utv_steer_drive_controller
           --shutdown-timeout 3"/>
 
   <node name="rqt_robot_steering" pkg="rqt_robot_steering" type="rqt_robot_steering">
-    <param name="default_topic" value="/utv_diff_drive_controller/cmd_vel"/>
+    <param name="default_topic" value="/utv_steer_drive_controller/cmd_vel"/>
   </node>
 </launch>
