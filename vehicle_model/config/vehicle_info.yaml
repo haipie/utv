@@ -1,0 +1,10 @@
+wheel_radius: 0.292
+wheel_width: 0.225
+wheel_base: 2.0
+wheel_tread: 1.24
+vehicle_mass: 2000.0
+vehicle_length: 2.9
+vehicle_width: 1.24
+vehicle_height: 1.9
+minimum_turning_radius: 2.950
+maximum_steering_angle: 97.3 #deg
